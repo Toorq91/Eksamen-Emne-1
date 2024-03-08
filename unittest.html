@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Test Suite</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.20.1.css">
+</head>
+
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="https://code.jquery.com/qunit/qunit-2.20.1.js"></script>
+    <script src="validateSudokoboard.js"></script>
+    <script>
+        QUnit.test('ugyldig brett, feil lengde', function (assert) {
+            // arrange
+            const sudokuboard = '12  34';
+
+            // act
+            const validation = validateSudokuboard(sudokuboard);
+
+            // assert
+            assert.equal(validation, 'ugyldig brett, feil lengde');
+        });
+
+        QUnit.test('ugyldig brett, ugyldig tegn', function (assert) {
+            // arrange
+            const sudokuboard = '12  34     z    ';
+
+            // act
+            const validation = validateSudokuboard(sudokuboard);
+
+            // assert
+            assert.equal(validation, 'ugyldig brett, ugyldig tegn');
+        });
+
+        QUnit.test('delvis utfylt, ingen feil', function (assert) {
+            // arrange
+            const sudokuboard = '12  34          ';
+
+            // act
+            const validation = validateSudokuboard(sudokuboard);
+
+            // assert
+            assert.equal(validation, 'delvis utfylt, ingen feil');
+        });
+
+        QUnit.test('delvis utfylt, samme tall to ganger på en rad', function (assert) {
+            // arrange
+            const sudokuboard = '121 34          ';
+
+            // act
+            const validation = validateSudokuboard(sudokuboard);
+
+            // assert
+            assert.equal(validation, 'delvis utfylt, feil i rad');
+        });
+
+        QUnit.test('delvis utfylt, samme tall to ganger på en kolonne', function (assert) {
+            // arrange
+            const sudokuboard = '12  34  1       ';
+
+            // act
+            const validation = validateSudokuboard(sudokuboard);
+
+            // assert
+            assert.equal(validation, 'delvis utfylt, feil i kolonne');
+        });
+
+        QUnit.test('delvis utfylt, samme tall to ganger i en firkant ', function (assert) {
+            // arrange
+            const sudokuboard = '12  34    2    2';
+
+            // act
+            const validation = validateSudokuboard(sudokuboard);
+
+            // assert
+            assert.equal(validation, 'delvis utfylt, feil i firkant');
+        });
+
+        QUnit.test('helt utfylt, ingen feil', function (assert) {
+            // arrange
+            const sudokuboard = '1234341221434321';
+
+            // act
+            const validation = validateSudokuboard(sudokuboard);
+
+            // assert
+            assert.equal(validation, 'helt utfylt, ingen feil');
+        });
+
+        QUnit.test('helt utfylt, samme tall to ganger på en rad', function (assert) {
+            // arrange
+            const sudokuboard = '1434321221434321';
+
+            // act
+            const validation = validateSudokuboard(sudokuboard);
+
+            // assert
+            assert.equal(validation, 'helt utfylt, feil i rad');
+        });
+
+        QUnit.test('helt utfylt, samme tall to ganger på en kolonne', function (assert) {
+            // arrange
+            const sudokuboard = '1432341221434321';
+
+            // act
+            const validation = validateSudokuboard(sudokuboard);
+
+            // assert
+            assert.equal(validation, 'helt utfylt, feil i kolonne');
+        });
+    </script>
+</body>
+
+</html>

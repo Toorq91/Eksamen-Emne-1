@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="sudokuGame.css">
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        // model
+        const boards = [
+            '12  34          ', // delvis utfylt, ingen feil
+            '121 34          ', // delvis utfylt, samme tall to ganger på en rad
+            '12  34  1       ', // delvis utfylt, samme tall to ganger på en kolonne
+            '12  34    2    2', // delvis utfylt, samme tall to ganger i en firkant            
+            '1234341221434321', // helt utfylt, ingen feil
+            '1434321221434321', // helt utfylt, samme tall to ganger på en rad
+            '1432341221434321', // helt utfylt, samme tall to ganger på en kolonne
+        ]
+        let selectedBoardIndex = 0;
+
+        // view
+        updateView();
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+                <div class="board">
+                    ${createSquares()}
+                </div>
+                <select onchange="selectBoard(this.value)">
+                    ${createOptions()}
+                </select>
+            `;
+        }
+
+        function createOptions() {
+            let html = '';
+            for (let index = 0; index < boards.length; index++) {
+                const board = boards[index];
+                html += /*HTML*/`<option value="${index}">${board}</option>`;
+            }
+            return html;
+        }
+
+        function createSquares() {
+            const board = boards[selectedBoardIndex];
+            let html = '';
+            for (let square of board) {
+                html += /*HTML*/`<div>${square}</div>`;
+            }
+            return html;
+        }
+
+        // controller
+        function selectBoard(index) {
+            selectedBoardIndex = index;
+            updateView();
+        }
+        
+    </script>
+</body>
+
+</html>
