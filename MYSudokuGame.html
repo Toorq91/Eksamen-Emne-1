@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+        const starterBoard = [1,2,3,4,' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '] // start posisjon for brettet
+
+        updateView();
+
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+            <div class="board">
+                ${createSquares()}
+            </div>
+            `;
+        }
+
+        function button1() {
+            
+        }
+
+        function button2() {
+
+        }
+
+        function button3() {
+
+        }
+
+        function button4() {
+
+        }
+
+        function hasDuplicatesRows() {
+            for (let row = 0; row < 4; row++) {
+                const seen = {};
+                const rowValues = board.slice(row * 4, (row + 1) * 4);
+
+                for (const num of rowValues) {
+                    if (num !== ' ' && seen[num]) {
+                        return true;
+                    }
+                    seen [num] = true;
+                }
+            }
+            return false;
+        }
+
+    </script>
+</body>
+</html>
