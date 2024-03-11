@@ -1,3 +1,4 @@
+// Funksjon som skal gå gjennom og samsvare med Unittesten.
 function validateSudokuboard(sudoboardString) {
     // denne variablen gjør at man ikke kan bruke noe annet enn 1,2,3,4 og [mellomrom].
     const validChars = /^[1-4 ]+$/;
@@ -58,21 +59,6 @@ function validateSudokuboard(sudoboardString) {
     }
 }
 
-function hasDuplicatesInRows(board) {
-    for (let row = 0; row < 4; row++) {
-        const seen = {};
-        const rowValues = board.slice(row * 4, (row + 1) * 4);
-
-        for (const num of rowValues) {
-            if (num !== ' ' && seen[num]) {
-                return true;
-            }
-            seen[num] = true;
-        }
-    }
-    return false;
-}
-
 // Funksjon for å konvertere en tekststreng til en liste med elementer, inkludert mellomrom.
 function stringToArrayWithSpaces(inputString) {
     // Deler teksten opp i en liste med elementer.
@@ -85,6 +71,48 @@ function stringToArrayWithSpaces(inputString) {
     return numericArray;
 }
 
+// Funksjon som sjekker om sudokubrettet bare er delvis utfylt.
+function partiallyFilled(board) {
+    // Teller antallet numeriske verdier (tall) i brettet ved hjelp av filter- og length-funksjonene.
+    const numberOfNumbers = board.filter(element => typeof element === 'number' && !isNaN(element)).length;
+    /* Returnerer true hvis antallet nummer verdier ikke er lik 16 (totalt antall celler i brettet), 
+    noe som vil si at brettet bare er delvis utfylt. */
+    return numberOfNumbers !== 16;
+}
+
+// Funksjon som sjekker om sudokubrettet er ferdig utfylt.
+function fullyFilled(board) {
+    // Teller antallet numeriske verdier (tall) i brettet ved hjelp av filter- og length-funksjonene.
+    const numberOfNumbers = board.filter(element => typeof element === 'number' && !isNaN(element)).length;
+    /* Returnerer true hvis antallet nummer verdier er lik 16 (totalt antall celler i brettet),
+    noe som vil si at brettet er helt utfylt. */
+    return numberOfNumbers === 16;
+}
+
+// Funksjon for å sjekke om det er 2 tall på samme rad.
+function hasDuplicatesInRows(board) {
+    // Itererer gjennom hver rad i brettet (0,1,2,3 og gir elementene row 0, row 1, row 2, row 3)
+    for (let row = 0; row < 4; row++) {
+        // Oppretter et tomt objekt for å holde styr på hvilke tall som allerede er sett i denne raden.
+        const seen = {};
+        // Henter verdiene for den gjeldende raden i teskststrengen (1d board)
+        const rowValues = board.slice(row * 4, (row + 1) * 4);
+
+        // Itererer gjennom hver verdi i raden.
+        for (const num of rowValues) {
+            // Sjekker om verdien ikke er et mellomrom (' ') og om den allerede er sett i denne raden.
+            if (num !== ' ' && seen[num]) {
+                // Hvis det er 2 like av samme tall, returnerer true (det er duplikater i raden).
+                return true;
+            }
+            // Merker verdien som er sett i denne raden.
+            seen[num] = true;
+        }
+    }
+    // Hvis det ikke er funnet 2 like tall i noen av radene, returner false.
+    return false;
+}
+
 /* tar inn en liste (board) som representerer et sudokubrett 
 (board) er skrevet som en lang liste: 1d (bare èn dimenson)
 "getColumns" lager en liste med lister: [[kolonne 0][kolonne 1][kolonne 2][kolonne 3]] 
@@ -93,7 +121,7 @@ function getColumns(board) {
     // variabel for tom liste
     const columns = [];
 
-    // går i gjennom kolonne(col) 0,1,2,3 
+    // går i gjennom kolonne (col) 0,1,2,3 
     // col representerer kolonne indexen, kunne bli navngitt hva som helst for eks. (i)
     for (let col = 0; col < 4; col++) {
         // "push" legger til et element i slutten av listen
@@ -154,14 +182,4 @@ function getSquares(board) {
     }
     // returnerer alle 4 firkanter som 1d.
     return squares.flat();
-}
-
-function partiallyFilled(board) {
-    const numberOfNumbers = board.filter(element => typeof element === 'number' && !isNaN(element)).length;
-    return numberOfNumbers !== 16;
-}
-
-function fullyFilled(board) {
-    const numberOfNumbers = board.filter(element => typeof element === 'number' && !isNaN(element)).length;
-    return numberOfNumbers === 16;
 }
