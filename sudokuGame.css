@@ -1,4 +1,6 @@
-.board {
+.board,
+.green,
+.pink {
     border: 2px solid blue;
     display: grid;
     grid-template-columns: repeat(4, 60px);
@@ -6,13 +8,24 @@
     width: fit-content;
 }
 
-.board>div {
+.board>div,
+.green>div,
+.pink>div {
     border: 1px solid lightblue;
     font-size: 300%;
     text-align: center;
     background-color: ivory;
 }
 
+.green>div {
+    background-color: lightgreen;
+}
+
+.pink>div {
+    background-color: pink;
+}
+
+/* Additional styling for borders in .board */
 .board>div:nth-child(3),
 .board>div:nth-child(7),
 .board>div:nth-child(11),
