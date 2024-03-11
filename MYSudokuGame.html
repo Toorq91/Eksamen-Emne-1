@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="sudokuGame.css">
+    <title>2x2 Sudoku</title>
 </head>
+
 <body>
     <div id="app"></div>
 
     <script>
-        const starterBoard = [1,2,3,4,' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '] // start posisjon for brettet
+        const starterBoard = [1, 2, 3, 4, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '] // start posisjon for brettet
 
-        updateView();
+        updateGame();
 
-        function updateView() {
+        function updateGame() {
             document.getElementById('app').innerHTML = /*HTML*/`
-            <div class="board">
-                ${createSquares()}
-            </div>
+            <div class="board">${createBoard()}</div>
+            <button style="font-size: 30px; width: 50px; height: 50px; margin-right: 10px;">1</button>
+            <button style="font-size: 50px; margin-right: 10px;">2</button>
+            <button style="font-size: 50px; margin-right: 10px;">3</button>
+            <button style="font-size: 50px; margin-right: 10px;">4</button>
             `;
         }
 
@@ -37,7 +42,28 @@
 
         }
 
-        function hasDuplicatesRows() {
+        function createBoard() {
+            let html = '';
+            
+            for (let index = 0; index < starterBoard.length; index++) {
+                const squareValue = starterBoard[index];
+                html += `<div>${squareValue}</div>`;
+            }
+            
+            return html;
+        }
+
+        function partiallyFilled(board) {
+            const numberOfnumbers = board.filter(element => typeof element === 'number' && !isNaN(element)).length;
+            return numberOfnumbers !== 16;
+        }
+
+        function fullyFilled(board) {
+            const numberOfnumbers = board.filter(element => typeof element === 'number' && !isNaN(element)).length;
+            return numberOfnumbers === 16;
+        }
+
+        function hasDuplicatesInRows() {
             for (let row = 0; row < 4; row++) {
                 const seen = {};
                 const rowValues = board.slice(row * 4, (row + 1) * 4);
@@ -46,12 +72,47 @@
                     if (num !== ' ' && seen[num]) {
                         return true;
                     }
-                    seen [num] = true;
+                    seen[num] = true;
                 }
             }
             return false;
         }
 
+        function getColumns(board) {
+            const columns = [];
+
+            for (let col = 0; col < 4; col++) {
+                columns.push([]);
+                for (let row = 0; row < 4; row++) {
+                    columns[col].push(board[row * 4 + col]);
+                }
+            }
+            return columns.flat();
+        }
+
+        function getSquare(board, startRow, startCol) {
+            const square = [];
+
+            for (let row = startRow; row < startRow + 2; row++) {
+                for (let col = startCol; col < startCol + 2; col++) {
+                    square.push(board[row * 4 + col]);
+                }
+            }
+            return square;
+        }
+
+        function getSqaures(board) {
+            const squares = [];
+
+            for (let startRow = 0; startRow < 4; startRow += 2) {
+                for (let startCol = 0; startCol < 4; startCol += 2) {
+                    squares.push(getSquare(board, startRow, startCol));
+                }
+            }
+            return squares.flat();
+        }
+
     </script>
 </body>
+
 </html>
