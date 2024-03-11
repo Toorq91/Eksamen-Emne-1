@@ -25,17 +25,32 @@
     background-color: pink;
 }
 
-/* Additional styling for borders in .board */
 .board>div:nth-child(3),
 .board>div:nth-child(7),
 .board>div:nth-child(11),
-.board>div:nth-child(15) {
+.board>div:nth-child(15),
+.green>div:nth-child(3),
+.green>div:nth-child(7),
+.green>div:nth-child(11),
+.green>div:nth-child(15),
+.pink>div:nth-child(3),
+.pink>div:nth-child(7),
+.pink>div:nth-child(11),
+.pink>div:nth-child(15) {
     border-left: 2px solid blue;
 }
 
 .board>div:nth-child(5),
 .board>div:nth-child(6),
 .board>div:nth-child(7),
-.board>div:nth-child(8) {
+.board>div:nth-child(8), 
+.green>div:nth-child(5),
+.green>div:nth-child(6),
+.green>div:nth-child(7),
+.green>div:nth-child(8),
+.pink>div:nth-child(5),
+.pink>div:nth-child(6),
+.pink>div:nth-child(7),
+.pink>div:nth-child(8) {
     border-bottom: 2px solid blue;
 }
