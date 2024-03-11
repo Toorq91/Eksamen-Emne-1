@@ -59,6 +59,10 @@ function validateSudokuboard(sudoboardString) {
     }
 }
 
+///////////////////////////
+// Koverter tekststreng til liste
+///////////////////////////
+
 // Funksjon for å konvertere en tekststreng til en liste med elementer, inkludert mellomrom.
 function stringToArrayWithSpaces(inputString) {
     // Deler teksten opp i en liste med elementer.
@@ -71,6 +75,10 @@ function stringToArrayWithSpaces(inputString) {
     return numericArray;
 }
 
+///////////////////////////
+// Sjekk om delvis utfylt
+///////////////////////////
+
 // Funksjon som sjekker om sudokubrettet bare er delvis utfylt.
 function partiallyFilled(board) {
     // Teller antallet numeriske verdier (tall) i brettet ved hjelp av filter- og length-funksjonene.
@@ -80,6 +88,10 @@ function partiallyFilled(board) {
     return numberOfNumbers !== 16;
 }
 
+///////////////////////////
+// Sjekk om ferdig utfylt
+///////////////////////////
+
 // Funksjon som sjekker om sudokubrettet er ferdig utfylt.
 function fullyFilled(board) {
     // Teller antallet numeriske verdier (tall) i brettet ved hjelp av filter- og length-funksjonene.
@@ -88,6 +100,10 @@ function fullyFilled(board) {
     noe som vil si at brettet er helt utfylt. */
     return numberOfNumbers === 16;
 }
+
+///////////////////////////
+// Sjekk duplikater på rad
+///////////////////////////
 
 // Funksjon for å sjekke om det er 2 tall på samme rad.
 function hasDuplicatesInRows(board) {
@@ -112,6 +128,10 @@ function hasDuplicatesInRows(board) {
     // Hvis det ikke er funnet 2 like tall i noen av radene, returner false.
     return false;
 }
+
+///////////////////////////
+// Hent kolonner 
+///////////////////////////
 
 /* tar inn en liste (board) som representerer et sudokubrett 
 (board) er skrevet som en lang liste: 1d (bare èn dimenson)
@@ -140,6 +160,10 @@ function getColumns(board) {
     return columns.flat();
 }
 
+///////////////////////////
+// Hent firkant
+///////////////////////////
+
 /* Tar inn en liste (board) som representerer et sudokubrett. 
 (board) er skrevet som en lang liste: 1d (bare èn dimenson)
 "getSquare" lager en liste som representerer en enkelt firkant på 2x2 
@@ -164,6 +188,10 @@ function getSquare(board, startRow, startCol) {
     // returnerer den genererte firkanten.
     return square;
 }
+
+///////////////////////////
+// Hent firkanter
+///////////////////////////
 
 // Hjelpefunksjon for å ta ut 2x2 firkanter ifra 1d listen som representerer sukodubrettet.
 function getSquares(board) {
