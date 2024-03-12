@@ -6,6 +6,7 @@
     grid-template-columns: repeat(4, 60px);
     grid-template-rows: repeat(4, 60px);
     width: fit-content;
+    cursor: pointer;
 }
 
 .board>div,
@@ -15,6 +16,7 @@
     font-size: 300%;
     text-align: center;
     background-color: ivory;
+    cursor: pointer;
 }
 
 .green>div {
@@ -23,6 +25,19 @@
 
 .pink>div {
     background-color: pink;
+}
+
+.board .selected {
+    background-color: rgb(236, 236, 38);
+}
+
+button {
+    font-size: 50px;
+    cursor: pointer;
+}
+
+button:hover {
+    box-shadow: 0 0 10px rgba(193, 11, 11, 0.694);
 }
 
 .board>div:nth-child(3),
