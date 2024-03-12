@@ -13,14 +13,14 @@
 
     <script>
         // start posisjon for brettet
-        const currentBoard = [1, 2, ' ', 3, 4, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+        const currentBoard = [1, 2, 4, 3, 4, 3, 1, 2, 3, 4, 2, 1, 2, 1, 3, ' ']
         let selectedSquareIndex = -1;
+        let finished = 0;
 
         updateView();
 
         function updateView() {
             let boardstyle = '';
-            let finished = 0;
 
             if (hasDuplicatesInRows(currentBoard) ||
                 hasDuplicatesInRows(getColumns(currentBoard)) ||
@@ -29,13 +29,22 @@
             } else if (fullyFilled(currentBoard) && !finished) {
                 finished = 1;
                 boardstyle = 'green';
-
+                
                 var youWonMessage = document.createElement("h1");
                 youWonMessage.innerHTML = "Alt er riktig! Du vant 😁";
                 youWonMessage.id = "youWonMessage";
                 document.body.appendChild(youWonMessage);
             } else {
                 boardstyle = 'board';
+            }
+
+            if (selectedSquareIndex !== -1 || finished) {
+                boardstyle = 'green';
+            }
+
+            const youWonElement = document.getElementById('youWonMessage');
+             if (youWonElement) {
+                youWonElement.style.display = finished ? 'block' : 'none';
             }
 
 
