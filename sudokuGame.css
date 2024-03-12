@@ -27,7 +27,9 @@
     background-color: pink;
 }
 
-.board .selected {
+.board .selected,
+.green .selected,
+.pink .selected {
     background-color: rgb(236, 236, 38);
 }
 
@@ -54,7 +56,7 @@ button:hover {
 .pink>div:nth-child(15) {
     border-left: 2px solid blue;
 }
-
+ 
 .board>div:nth-child(5),
 .board>div:nth-child(6),
 .board>div:nth-child(7),
