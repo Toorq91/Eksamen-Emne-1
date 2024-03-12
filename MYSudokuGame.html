@@ -12,33 +12,41 @@
     <div id="app"></div>
 
     <script>
-        const currentBoard = [1, 2, ' ', 3, 4, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '] // start posisjon for brettet
-        const starterBoard = [1, 2, ' ', 3, 4, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '] // start posisjon for brettet
+        // start posisjon for brettet
+        const currentBoard = [1, 2, ' ', 3, 4, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
         let selectedSquareIndex = -1;
 
         updateView();
 
         function updateView() {
-            const styleSize = ('font-size: 50px; width: 55px; height: 65px; margin-right: 2px;');
-            const margins = ('margin-left: 3px; margin-top: 5px');
             let boardstyle = '';
-            if (hasDuplicatesInRows(currentBoard) || 
-            hasDuplicatesInRows(getColumns(currentBoard)) || 
-            hasDuplicatesInRows(getSquares(currentBoard))) {
+            let finished = 0;
+
+            if (hasDuplicatesInRows(currentBoard) ||
+                hasDuplicatesInRows(getColumns(currentBoard)) ||
+                hasDuplicatesInRows(getSquares(currentBoard))) {
                 boardstyle = 'pink';
-            }   else if (fullyFilled(currentBoard)) {
+            } else if (fullyFilled(currentBoard) && !finished) {
+                finished = 1;
                 boardstyle = 'green';
-            }   else { boardstyle = 'board';
+
+                var youWonMessage = document.createElement("h1");
+                youWonMessage.innerHTML = "Alt er riktig! Du vant 😁";
+                youWonMessage.id = "youWonMessage";
+                document.body.appendChild(youWonMessage);
+            } else {
+                boardstyle = 'board';
             }
 
 
             document.getElementById('app').innerHTML = /*HTML*/`
             <div class="${boardstyle}">${createBoard()}</div>
-            <button onclick="button1()" style="${styleSize}${margins}">1</button>
-            <button onclick="button2()" style="${styleSize}">2</button>
-            <button onclick="button3()" style="${styleSize}">3</button>
-            <button onclick="button4()" style="${styleSize}">4</button><br/>
-            <button style="font-size: 30px" onclick="resetButton()">Reset</button>
+                <button onclick="button1()" class="buttonOne">1</button>
+                <button onclick="button2()" class="button234">2</button>
+                <button onclick="button3()" class="button234">3</button>
+                <button onclick="button4()" class="button234">4</button><br/>
+                <button class="reset" onclick="resetButton()">Reset</button>
+                <h1 id="youWonMessage" style="display: ${finished ? 'block' : 'none'};"></h1>
             `;
         }
 
@@ -72,6 +80,7 @@
 
         // ikke ferdig
         function resetButton() {
+            const starterBoard = [1, 2, ' ', 3, 4, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
             currentBoard.splice(0, currentBoard.length, ...starterBoard);
             updateView();
         }
@@ -91,12 +100,6 @@
         function selectSquare(index) {
             selectedSquareIndex = index;
             updateView();
-        }
-
-        //tror ikke jeg trenger, sjekk
-        function partiallyFilled(board) {
-            const numberOfnumbers = board.filter(element => typeof element === 'number' && !isNaN(element)).length;
-            return numberOfnumbers !== 16;
         }
 
         function fullyFilled(board) {
