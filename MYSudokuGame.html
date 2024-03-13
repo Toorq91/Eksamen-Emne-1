@@ -12,101 +12,23 @@
     <div id="app" style="user-select: none;"></div>
 
     <script>
-        // start posisjon for brettet
+        ///////////////
+        // Model
+        ///////////////
+
+        // start posisjon for brettet.
         const currentBoard = [1, 2, ' ', 3, 4, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+        // Setter Indeksen (ID) på en celle som er trykket i sudokubrettet så den kan få en verdi ved å trykke på en av knappene.
         let selectedSquareIndex = -1;
+        // Denne variabelen sier om spillet er ferdig eller ikke, hvis verdien blir satt til 1 er spillet ferdig.
         let finished = 0;
+        // Begynner som en tom tekst som settes til å vise en gratulasjonsmelding på skjermen når spillet er slutt.
         let youWonMessage = document.createElement("h1");
 
-        updateView();
-
-        function updateView() {
-            let boardstyle = '';
-
-            if (hasDuplicatesInRows(currentBoard) ||
-                hasDuplicatesInRows(getColumns(currentBoard)) ||
-                hasDuplicatesInRows(getSquares(currentBoard))) {
-                boardstyle = 'pink';
-            } else if (fullyFilled(currentBoard) && !finished) {
-                finished = 1;
-                boardstyle = 'green';
-
-                youWonMessage.innerHTML = "Alt er riktig! Du vant 😁";
-                youWonMessage.id = "youWonMessage";
-                document.body.appendChild(youWonMessage);
-                selectedSquareIndex = -1;
-            } else {
-                boardstyle = 'board';
-            }
-
-            document.getElementById('app').innerHTML = /*HTML*/`
-            <div class="${boardstyle}">${createBoard()}</div>
-                <button onclick="button1()" class="buttonOne">1</button>
-                <button onclick="button2()" class="button234">2</button>
-                <button onclick="button3()" class="button234">3</button>
-                <button onclick="button4()" class="button234">4</button><br/>
-                <button class="reset" onclick="resetButton()">Reset</button>
-                <h1 id="youWonMessage" style="display: ${finished ? 'block' : 'none'};"></h1>
-            `;
-        }
-
-        function button1() {
-            if (selectedSquareIndex !== -1) {
-                currentBoard[selectedSquareIndex] = 1;
-                updateView();
-            }
-        }
-
-        function button2() {
-            if (selectedSquareIndex !== -1) {
-                currentBoard[selectedSquareIndex] = 2;
-                updateView();
-            }
-        }
-
-        function button3() {
-            if (selectedSquareIndex !== -1) {
-                currentBoard[selectedSquareIndex] = 3;
-                updateView();
-            }
-        }
-
-        function button4() {
-            if (selectedSquareIndex !== -1) {
-                currentBoard[selectedSquareIndex] = 4;
-                updateView();
-            }
-        }
-
-        // snart ferdig :)
-        function resetButton() {
-            const starterBoard = [1, 2, ' ', 3, 4, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
-            currentBoard.splice(0, currentBoard.length, ...starterBoard);
-            selectedSquareIndex = -1;
-            finished = 0;
-            youWonMessage.innerHTML = '';
-            updateView();
-        }
-
-        function createBoard() {
-            let html = '';
-
-            for (let index = 0; index < currentBoard.length; index++) {
-                const squareValue = currentBoard[index];
-                const isSelected = index === selectedSquareIndex ? 'selected' : '';
-                html += `<div class="square ${isSelected}" onclick="selectSquare(${index})">${squareValue}</div>`;
-            }
-
-            return html;
-        }
-
-        function selectSquare(index) {
-            if (!finished) {
-                selectedSquareIndex = index;
-                updateView();
-            }
-        }
-
+        /* Funksjon som verifiserer at 16/16 numeriske elementer (bare tall, ikke mellomrom) er satt på sudokubrettet og da kan henvise til at spillet er ferdig.
+        Funksjonen gjør dette ved hjelp av "filter" som teller antall tall i brettet (ved å sjekke både typen og at de ikke er NaN), 
+        og deretter sammenligner den dette tallet med 16. 
+        Hvis tallet er 16 vil det si at brettet er utfylt (ferdig), og den returnerer "true" ellers returnerer den "false". */
         function fullyFilled(board) {
             const numberOfnumbers = board.filter(element => typeof element === 'number' && !isNaN(element)).length;
             return numberOfnumbers === 16;
@@ -161,7 +83,104 @@
             return squares.flat();
         }
 
-    </script>
+        ///////////////
+        // View
+        ///////////////
+
+        updateView();
+
+        function updateView() {
+            let boardstyle = '';
+
+            if (hasDuplicatesInRows(currentBoard) ||
+                hasDuplicatesInRows(getColumns(currentBoard)) ||
+                hasDuplicatesInRows(getSquares(currentBoard))) {
+                boardstyle = 'pink';
+            } else if (fullyFilled(currentBoard) && !finished) {
+                finished = 1;
+                boardstyle = 'green';
+
+                youWonMessage.innerHTML = "Alt er riktig! Du vant 😁";
+                youWonMessage.id = "youWonMessage";
+                document.body.appendChild(youWonMessage);
+                selectedSquareIndex = -1;
+            } else {
+                boardstyle = 'board';
+            }
+
+            document.getElementById('app').innerHTML = /*HTML*/`
+            <div class="${boardstyle}">${createBoard()}</div>
+                <button onclick="button1()" class="buttonOne">1</button>
+                <button onclick="button2()" class="button234">2</button>
+                <button onclick="button3()" class="button234">3</button>
+                <button onclick="button4()" class="button234">4</button><br/>
+                <button class="reset" onclick="resetButton()">Reset</button>
+                <h1 id="youWonMessage" style="display: ${finished ? 'block' : 'none'};"></h1>
+            `;
+        }
+
+        ///////////////
+        // Controller
+        ///////////////
+
+        function button1() {
+            if (selectedSquareIndex !== -1) {
+                currentBoard[selectedSquareIndex] = 1;
+                updateView();
+            }
+        }
+
+        function button2() {
+            if (selectedSquareIndex !== -1) {
+                currentBoard[selectedSquareIndex] = 2;
+                updateView();
+            }
+        }
+
+        function button3() {
+            if (selectedSquareIndex !== -1) {
+                currentBoard[selectedSquareIndex] = 3;
+                updateView();
+            }
+        }
+
+        function button4() {
+            if (selectedSquareIndex !== -1) {
+                currentBoard[selectedSquareIndex] = 4;
+                updateView();
+            }
+        }
+
+        function createBoard() {
+            let html = '';
+            
+            for (let index = 0; index < currentBoard.length; index++) {
+                const squareValue = currentBoard[index];
+                const isSelected = index === selectedSquareIndex ? 'selected' : '';
+                html += `<div class="square ${isSelected}" onclick="selectSquare(${index})">${squareValue}</div>`;
+            }
+            
+            return html;
+        }
+        
+        function selectSquare(index) {
+            if (!finished) {
+                selectedSquareIndex = index;
+                updateView();
+            }
+        }
+        
+        // snart ferdig :)
+        function resetButton() {
+            const starterBoard = [1, 2, ' ', 3, 4, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+            currentBoard.splice(0, currentBoard.length, ...starterBoard);
+            selectedSquareIndex = -1;
+            finished = 0;
+            youWonMessage.innerHTML = '';
+            updateView();
+        }
+
+        </script>
 </body>
 
 </html>
