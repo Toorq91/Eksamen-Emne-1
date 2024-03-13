@@ -1,0 +1,25 @@
+Hva er enhetstesting?
+Enhetstesting er en metode for å sjekke om funksjoner i koden fungerer som de skal. 
+Denne testmetoden innebærer å isolere små seksjoner (funksjoner) av koden og teste dem individuelt. 
+Resultatene av testene sammenlignes deretter med forventede resultater for å identifisere 
+eventuelle avvik mellom faktisk og forventet resultat.
+
+Noen fordeler med enhetstesting:
+Det kan gjøre det enklere å fokusere på koding ettersom testene blir kjørt fortløpende og 
+gir feilmelding hvis ting ikke fungerer.
+Den hjelper å oppdage feil tidlig i utviklingsprosessen.
+Enhetstester fungerer som dokumentasjon for at man har sjekket over koden ordentlig.
+
+Noen ulemper med enhetstesting:
+Noen ganger kan enhetstesting gjøre det vanskelig å legge til eller endre 
+ting senere i prosjektet fordi man har isolert så mange deler.
+Enhets testing løser ikke alle problemer, og noen ganger kan problemene bli for vanskelige å håndtere.
+Selv om det er bra å kunne bruke enhetstesting, er det ikke alltid lurt å teste alt man gjør, 
+da dette kan føre til mye ekstra koding. 
+
+
+Programmering av funksjonen validateSudokuboard():
+Det var en deilig følelse når jeg klarte å få testene til å kjøre gjennom (.okay) og ikke fikk flere feilmeldinger. 
+Det hjalp meg å se nøyaktig hva som gikk galt med koden, hva den forventet, og hva resultatet ble, 
+i motsetning til bare en blank side i HTML-en. Dette gjør det mye enklere å finne og rette feil. 
+Jeg ser for meg at dette kan være et nyttig verktøy mens jeg fortsetter med kodingen.

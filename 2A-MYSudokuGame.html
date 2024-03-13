@@ -49,8 +49,9 @@
             return false;
         }
 
-        /* Gjør om hele listen til kolonner ut av strengen som er gitt ifra currentboard 
-        og returnerer dette som en ny liste ved hjelp av "flat()" metoden (gjør om alle listene tilbake til 1d liste). */
+        /* Gjør om hele listen currentboard til kolonner 2d 
+        og returnerer dette som en ny liste ved hjelp av "flat()" metoden 
+        (gjør om alle listene tilbake til 1d liste). */
         function getColumns(board) {
             const columns = [];
 
@@ -63,7 +64,7 @@
             return columns.flat();
         }
 
-        /* Gjør om hele listen til èn firkant (2x2 kvadrat) ut av strengen som er gitt ifra currentboard */
+        // Henter ut én firkant fra listen (2x2 kvadrat) ut fra en gitt startrad og startkolonne.
         function getSquare(board, startRow, startCol) {
             const square = [];
 
@@ -75,8 +76,8 @@
             return square;
         }
 
-        /* Funksjonen genererer en list av firkanter ved å dele opp brette i 2x2 kvadrater.
-        Hver firkant hentes ut ifra "getSquare" og legges til i listen */
+        /* Funksjonen genererer en liste av firkanter ved å dele opp brettet i 2x2 kvadrater (1d).
+        Hver firkant genereres av "getSquare" og legges til i listen. */
         function getSquares(board) {
             const squares = [];
 
@@ -95,7 +96,8 @@
         // kaller på viewet
         updateView();
 
-        /* Denne funksjonen tar for seg alt som skal vises i HTML-en. Den maler opp hele sudokubrettet og knappene med farger og instillinger som er skrevet i CSS filen.
+        /* Denne funksjonen tar for seg alt som skal vises i HTML-en. 
+        Den visualiserer hele sudokubrettet og knappene, med farger og instillinger som er skrevet i CSS filen.
         Har også betingelser satt for om man har vunnet eller ikke og hva som skal vises da. */
         function updateView() {
             let boardstyle = '';
@@ -131,7 +133,7 @@
         // Controller
         ///////////////
 
-        // Erstatter innholde i den valgte indexen (cellen) til tallet 1.
+        // Erstatter innholdet i den valgte indexen (cellen) til tallet 1.
         function button1() {
             if (selectedSquareIndex !== -1) {
                 currentBoard[selectedSquareIndex] = 1;
@@ -139,7 +141,7 @@
             }
         }
 
-        // Erstatter innholde i den valgte indexen (cellen) til tallet 2.
+        // Erstatter innholdet i den valgte indexen (cellen) til tallet 2.
         function button2() {
             if (selectedSquareIndex !== -1) {
                 currentBoard[selectedSquareIndex] = 2;
@@ -147,7 +149,7 @@
             }
         }
 
-        // Erstatter innholde i den valgte indexen (cellen) til tallet 3.
+        // Erstatter innholdet i den valgte indexen (cellen) til tallet 3.
         function button3() {
             if (selectedSquareIndex !== -1) {
                 currentBoard[selectedSquareIndex] = 3;
@@ -155,7 +157,7 @@
             }
         }
 
-        // Erstatter innholde i den valgte indexen (cellen) til tallet 4.
+        // Erstatter innholdet i den valgte indexen (cellen) til tallet 4.
         function button4() {
             if (selectedSquareIndex !== -1) {
                 currentBoard[selectedSquareIndex] = 4;
@@ -176,7 +178,7 @@
             return html;
         }
         
-        // Setter den valgte ruten til gul og hvis spillet er ferdig blir den fjernet.
+        // Setter den valgte ruten til gul. Fjerner denne funksjonaliteten når spillet er ferdig.
         function selectSquare(index) {
             if (!finished) {
                 selectedSquareIndex = index;
