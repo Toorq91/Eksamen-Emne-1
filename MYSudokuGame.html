@@ -13,9 +13,10 @@
 
     <script>
         // start posisjon for brettet
-        const currentBoard = [1, 2, 4, 3, 4, 3, 1, 2, 3, 4, 2, 1, 2, 1, 3, ' ']
+        const currentBoard = [1, 2, ' ', 3, 4, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
         let selectedSquareIndex = -1;
         let finished = 0;
+        let youWonMessage = document.createElement("h1");
 
         updateView();
 
@@ -29,24 +30,14 @@
             } else if (fullyFilled(currentBoard) && !finished) {
                 finished = 1;
                 boardstyle = 'green';
-                
-                var youWonMessage = document.createElement("h1");
+
                 youWonMessage.innerHTML = "Alt er riktig! Du vant 😁";
                 youWonMessage.id = "youWonMessage";
                 document.body.appendChild(youWonMessage);
+                selectedSquareIndex = -1;
             } else {
                 boardstyle = 'board';
             }
-
-            if (selectedSquareIndex !== -1 || finished) {
-                boardstyle = 'green';
-            }
-
-            const youWonElement = document.getElementById('youWonMessage');
-             if (youWonElement) {
-                youWonElement.style.display = finished ? 'block' : 'none';
-            }
-
 
             document.getElementById('app').innerHTML = /*HTML*/`
             <div class="${boardstyle}">${createBoard()}</div>
@@ -87,10 +78,13 @@
             }
         }
 
-        // ikke ferdig
+        // snart ferdig :)
         function resetButton() {
             const starterBoard = [1, 2, ' ', 3, 4, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
             currentBoard.splice(0, currentBoard.length, ...starterBoard);
+            selectedSquareIndex = -1;
+            finished = 0;
+            youWonMessage.innerHTML = '';
             updateView();
         }
 
@@ -107,8 +101,10 @@
         }
 
         function selectSquare(index) {
-            selectedSquareIndex = index;
-            updateView();
+            if (!finished) {
+                selectedSquareIndex = index;
+                updateView();
+            }
         }
 
         function fullyFilled(board) {
