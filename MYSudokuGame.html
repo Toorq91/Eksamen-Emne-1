@@ -25,15 +25,15 @@
         // Begynner som en tom tekst som settes til å vise en gratulasjonsmelding på skjermen når spillet er slutt.
         let youWonMessage = document.createElement("h1");
 
-        /* Funksjon som verifiserer at 16/16 numeriske elementer (bare tall, ikke mellomrom) er satt på sudokubrettet og da kan henvise til at spillet er ferdig.
-        Funksjonen gjør dette ved hjelp av "filter" som teller antall tall i brettet (ved å sjekke både typen og at de ikke er NaN), 
-        og deretter sammenligner den dette tallet med 16. 
-        Hvis tallet er 16 vil det si at brettet er utfylt (ferdig), og den returnerer "true" ellers returnerer den "false". */
+        // Funksjon som verifiserer om det er 16/16 tall (ingenting annet) plassert i brettet og returnerer "true".
         function fullyFilled(board) {
             const numberOfnumbers = board.filter(element => typeof element === 'number' && !isNaN(element)).length;
             return numberOfnumbers === 16;
         }
 
+        /* Funksjonen går gjennom alle tallene ifra "currentBoard" (alle posisjonene 1-16), og gjør om disse til rader.
+         Bruker "seen"-objekt som funker som en "hash map" (setter verdiene den får til "true" eller "false"), 
+         dette blir gjort får å se om tallet den sjekker allerede eksisterer eller ikke. */
         function hasDuplicatesInRows(board) {
             for (let row = 0; row < 4; row++) {
                 const seen = {};
@@ -49,6 +49,8 @@
             return false;
         }
 
+        /* Gjør om hele listen til kolonner ut av strengen som er gitt ifra currentboard 
+        og returnerer dette som en ny liste ved hjelp av "flat()" metoden (gjør om alle listene tilbake til 1d liste). */
         function getColumns(board) {
             const columns = [];
 
@@ -61,6 +63,7 @@
             return columns.flat();
         }
 
+        /* Gjør om hele listen til èn firkant (2x2 kvadrat) ut av strengen som er gitt ifra currentboard */
         function getSquare(board, startRow, startCol) {
             const square = [];
 
@@ -72,6 +75,8 @@
             return square;
         }
 
+        /* Funksjonen genererer en list av firkanter ved å dele opp brette i 2x2 kvadrater.
+        Hver firkant hentes ut ifra "getSquare" og legges til i listen */
         function getSquares(board) {
             const squares = [];
 
@@ -87,8 +92,11 @@
         // View
         ///////////////
 
+        // kaller på viewet
         updateView();
 
+        /* Denne funksjonen tar for seg alt som skal vises i HTML-en. Den maler opp hele sudokubrettet og knappene med farger og instillinger som er skrevet i CSS filen.
+        Har også betingelser satt for om man har vunnet eller ikke og hva som skal vises da. */
         function updateView() {
             let boardstyle = '';
 
@@ -123,6 +131,7 @@
         // Controller
         ///////////////
 
+        // Erstatter innholde i den valgte indexen (cellen) til tallet 1.
         function button1() {
             if (selectedSquareIndex !== -1) {
                 currentBoard[selectedSquareIndex] = 1;
@@ -130,6 +139,7 @@
             }
         }
 
+        // Erstatter innholde i den valgte indexen (cellen) til tallet 2.
         function button2() {
             if (selectedSquareIndex !== -1) {
                 currentBoard[selectedSquareIndex] = 2;
@@ -137,6 +147,7 @@
             }
         }
 
+        // Erstatter innholde i den valgte indexen (cellen) til tallet 3.
         function button3() {
             if (selectedSquareIndex !== -1) {
                 currentBoard[selectedSquareIndex] = 3;
@@ -144,6 +155,7 @@
             }
         }
 
+        // Erstatter innholde i den valgte indexen (cellen) til tallet 4.
         function button4() {
             if (selectedSquareIndex !== -1) {
                 currentBoard[selectedSquareIndex] = 4;
@@ -151,6 +163,7 @@
             }
         }
 
+        // Tegner opp hele brettet og tillater at man kan klikke på de 16 ulike posisjonene (cellene).
         function createBoard() {
             let html = '';
             
@@ -163,6 +176,7 @@
             return html;
         }
         
+        // Setter den valgte ruten til gul og hvis spillet er ferdig blir den fjernet.
         function selectSquare(index) {
             if (!finished) {
                 selectedSquareIndex = index;
@@ -170,7 +184,7 @@
             }
         }
         
-        // snart ferdig :)
+        // Denne funksjonen lager en Reset knapp som kan benyttes når som helst i spillet og setter brettet tilbake i startposisjon.
         function resetButton() {
             const starterBoard = [1, 2, ' ', 3, 4, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
             currentBoard.splice(0, currentBoard.length, ...starterBoard);
