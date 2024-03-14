@@ -33,8 +33,25 @@ Kort forklart - (Controller) Styrer det som skal skje med (Model) og (View), bli
 (MVC) i min kode:
 
 (Model): 
-Gir meg start posisjonen. 
-ID for cellene.
-Verdi på om spillet er ferdig.
-Tom tekst som benytter h1 tag for å gratulere nå spillet er ferdig
+Variablene gir meg startposisjonen, ID for cellene, verdi på om spillet er ferdig og tom tekst som benytter h1 tag for å gratulere når spillet er ferdig.
 
+fullyFilled: er for å se om tallet er 16 eller ikke.
+
+hasDuplicatesInRows: er for å sjekke duplikate tall i radene på brettet.
+
+getColumns: er for å sjekke duplikate tall i kolonnene på brettet.
+
+getSquare: er en under funksjon som trengs av getSquares for å hente ut èn firkant.
+
+getSquares: bruker getSquare for å sjekke om det er duplikate tall i noen av firkantene i brettet.
+
+
+(View):
+updateView(); Kaller på viewet
+
+function updateView(): Viser alt som skal stå i den tomme <div>-en i body ved å referere med id="app".
+Den tegner opp hele brettet, knappene, vinner tekst og tallene i feltene samt sammarbeider med CSS for å kunne fargelegge, bytte størrelse etc.
+
+button1,2,3,4: Er ansvarlig for å bytte ut det som står i den valgte cellen med tallene 1-4.
+
+buttonReset: 

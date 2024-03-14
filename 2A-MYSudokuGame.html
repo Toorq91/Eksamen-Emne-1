@@ -93,7 +93,7 @@
         // View
         ///////////////
 
-        // kaller på viewet
+        // Kaller på viewet
         updateView();
 
         /* Denne funksjonen tar for seg alt som skal vises i HTML-en. 
@@ -165,27 +165,6 @@
             }
         }
 
-        // Tegner opp hele brettet og tillater at man kan klikke på de 16 ulike posisjonene (cellene).
-        function createBoard() {
-            let html = '';
-            
-            for (let index = 0; index < currentBoard.length; index++) {
-                const squareValue = currentBoard[index];
-                const isSelected = index === selectedSquareIndex ? 'selected' : '';
-                html += `<div class="square ${isSelected}" onclick="selectSquare(${index})">${squareValue}</div>`;
-            }
-            
-            return html;
-        }
-        
-        // Setter den valgte ruten til gul. Fjerner denne funksjonaliteten når spillet er ferdig.
-        function selectSquare(index) {
-            if (!finished) {
-                selectedSquareIndex = index;
-                updateView();
-            }
-        }
-        
         // Denne funksjonen lager en Reset knapp som kan benyttes når som helst i spillet og setter brettet tilbake i startposisjon.
         function resetButton() {
             const starterBoard = [1, 2, ' ', 3, 4, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
@@ -196,7 +175,28 @@
             updateView();
         }
 
-        </script>
+        // Tegner opp hele brettet og tillater at man kan klikke på de 16 ulike posisjonene (cellene).
+        function createBoard() {
+            let html = '';
+
+            for (let index = 0; index < currentBoard.length; index++) {
+                const squareValue = currentBoard[index];
+                const isSelected = index === selectedSquareIndex ? 'selected' : '';
+                html += `<div class="square ${isSelected}" onclick="selectSquare(${index})">${squareValue}</div>`;
+            }
+
+            return html;
+        }
+
+        // Setter den valgte ruten til gul. Fjerner denne funksjonaliteten når spillet er ferdig.
+        function selectSquare(index) {
+            if (!finished) {
+                selectedSquareIndex = index;
+                updateView();
+            }
+        }
+
+    </script>
 </body>
 
 </html>
