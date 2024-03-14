@@ -1,0 +1,46 @@
+Model-View-Controller (MVC):
+Ved bruken av MVC oppsett, deler man applikasjonen opp i tre komponenter: 
+
+* Model: 
+1. Denne delen tar for seg strukturen og egenskapene til dataene som applikasjonen arbeider med.
+
+2. Håndterer kommunikasjon med databaser, API-er eller lokale lagringsenheter for å hente og lagre data.
+
+3. Setter reglene og logikken for hvordan dataene i applikasjonen endres og behandles.
+
+4. Holder styr i dataen på endringer som skjer over tid i applikasjonen.
+
+5. Fungerer som en bro mellom brukergrensesnittet og datalagringssystemene.
+
+Kort forklart - (Model) tar for seg de tingene som har med henting og lagring av data samt endringer over tid i programmet å gjøre.
+
+
+*View:
+1. Ansvarlig for å presentere dataene for brukeren samt håndtere brukergrensesnittet som inkluderer, (formatering av data, opprettelse av tabeller, lister, diagrammer etc.)
+
+2. 
+
+Kort forklart - (View) tar for seg alt som har med visning (presentasjon) av data å gjøre.
+
+
+
+
+
+
+
+Selvfølgelig! I MVC-arkitekturen er "View" (visning) komponenten ansvarlig for å presentere dataene for brukeren og håndtere brukergrensesnittet. 
+Kort sagt, "View" tar seg av alt som har med presentasjonen av data å gjøre. Her er noen hovedpunkter om hva "View" gjør:
+
+1 Presentasjon av data: "View" er ansvarlig for å vise dataene fra modellen på en måte som er forståelig og brukervennlig for brukeren. 
+Dette kan inkludere formatering av data, opprettelse av tabeller, lister, diagrammer osv.
+
+2 Brukergrensesnitt: "View" definerer brukergrensesnittet som brukeren interagerer med. Dette inkluderer utforming av sider, knapper, skjemaer og andre interaktive elementer.
+
+3 Responsivitet: "View" kan også være ansvarlig for å oppdatere brukergrensesnittet dynamisk basert på brukerens handlinger eller endringer i dataene. 
+Dette kan omfatte å vise eller skjule elementer, oppdatere innholdet i sanntid og gi tilbakemelding til brukeren.
+
+4 Brukerinteraksjon: Selv om "View" vanligvis er passiv og ikke inneholder forretningslogikk, 
+kan den håndtere enkle brukerinteraksjoner som å klikke på knapper eller fylle ut skjemaer og deretter sende disse handlingene videre til kontrolleren for behandling.
+
+Samlet sett spiller "View" en viktig rolle i å skape et brukervennlig og intuitivt grensesnitt for brukerne, 
+og det samhandler tett med både modellen og kontrolleren for å presentere dataene på en meningsfull måte.
