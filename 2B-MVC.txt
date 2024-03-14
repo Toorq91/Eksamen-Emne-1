@@ -1,6 +1,5 @@
 Model-View-Controller (MVC):
 Ved bruken av MVC oppsett, deler man applikasjonen opp i tre komponenter noe som gjør ting mer oversiktlig og lettere å jobbe med: 
-
 (Model) tar for seg de tingene som har med henting og lagring av data, samt endringer over tid.
 (View) tar for seg alt som har med visning av data å gjøre i samhandel med (Model) og (controller) og presenterer dette på en meningsfull måte.
 (Controller) styrer det som skal skje med (Model) og (View), blir som et bindeledd mellom brukerens handlinger og applikasjonens logikk.
@@ -26,7 +25,7 @@ Sørger for at riktig handling eller respons blir utført av applikasjonen baser
 
 
 
-(MVC) i min kode:
+MVC i min kode:
 
 (Model): 
 currentBoard: gir startposisjonen og oppdateres ettersom cellene blir fyllt inn. 
