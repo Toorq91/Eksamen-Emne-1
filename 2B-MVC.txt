@@ -1,64 +1,67 @@
 Model-View-Controller (MVC):
-Ved bruken av MVC oppsett, deler man applikasjonen opp i tre komponenter noe som gjør ting mer oversiktlig og letter å jobbe med: 
+Ved bruken av MVC oppsett, deler man applikasjonen opp i tre komponenter noe som gjør ting mer oversiktlig og lettere å jobbe med: 
 
+(Model) tar for seg de tingene som har med henting og lagring av data, samt endringer over tid.
+(View) tar for seg alt som har med visning av data å gjøre i samhandel med (Model) og (controller) og presenterer dette på en meningsfull måte.
+(Controller) styrer det som skal skje med (Model) og (View), blir som et bindeledd mellom brukerens handlinger og applikasjonens logikk.
 
 (Model): 
 Denne delen tar for seg strukturen og egenskapene til dataene som applikasjonen arbeider med.
 Håndterer kommunikasjon med databaser, API-er eller lokale lagringsenheter for å hente og lagre data.
 Setter reglene og logikken for hvordan dataene i applikasjonen endres og behandles.
-Holder styr i dataen på endringer som skjer over tid i applikasjonen.
 Fungerer som en bro mellom datalagringssystemene og brukergrensesnittet (det som blir vist på skjermen, også kalt "UI - User Interface").
 
-Kort forklart - (Model) tar for seg de tingene som har med henting og lagring av data, samt endringer over tid i programmet å gjøre.
-
-
 (View):
-Ansvarlig for å presentere dataene for brukeren samt håndtere brukergrensesnittet som: Formatering av data, opprettelse av tabeller, lister, diagrammer etc.
-Den definerer brukergrensesnittet som brukeren jobber med: Utformingen av sider, knapper, skjemaer og andre elementer.
-(View) kan oppdatere brukergrensesnittet basert på brukerens handlinger eller endringer i dataen som: Å skjule elementer, oppdatere innholdet i sann tid og gi tilbakemelding til brukeren.
-(View) er som regel passiv men kan håndtere enkle brukerinteraksjoner som: Å klikke på knapper eller fylle ut skjemaer og sende disse handlingene videre til (Controller) for behandling.
-
-Kort forklart - (View) tar for seg alt som har med visning av data å gjøre i samhandel med (Model) og (controller) og presentere dette på en meningsfull måte.
+Ansvarlig for å presentere dataene for brukeren samt håndtere brukergrensesnittet som: formatering av data, opprettelse av tabeller, lister, diagrammer etc.
+Den definerer brukergrensesnittet som brukeren jobber med: utformingen av sider, knapper, skjemaer og andre elementer.
+(View) kan oppdatere brukergrensesnittet basert på brukerens handlinger eller endringer i dataen som: å skjule elementer, oppdatere innholdet i sann tid og gi tilbakemelding til brukeren.
+(View) er som regel passiv men kan håndtere enkle brukerinteraksjoner som: å klikke på knapper eller fylle ut skjemaer og sende disse handlingene videre til (Controller) for behandling.
 
 
 (Controller):
-Mottar brukerens handlinger fra brukergrensesnittet (View) som: Klikk på knapper eller utfylling av skjemaer.
+Mottar brukerens handlinger fra brukergrensesnittet (View) som: klikk på knapper eller utfylling av skjemaer.
 Bestemmer hvordan modellen skal oppdateres eller hvilke handlinger som skal utføres.
 Sørger for at riktig handling eller respons blir utført av applikasjonen basert på hva brukeren gjør eller trykker på brukergrensesnittet.
 
-Kort forklart - (Controller) Styrer det som skal skje med (Model) og (View), blir som et bindeledd mellom brukerens handlinger og applikasjonens logikk.
 
 
 
 (MVC) i min kode:
 
 (Model): 
-currentBoard: Gir meg startposisjonen. 
-selectedSquareIndex: Gir ID for cellene. 
-finished: Setter verdi på om spillet er ferdig. 
-youWonMessage: Setter tom tekst med h1 tag for å gratulere når spillet er ferdig.
+currentBoard: gir startposisjonen og oppdateres ettersom cellene blir fyllt inn. 
+selectedSquareIndex: gir indeks for cellene. 
+finished: binær verdi som viser om spillet er ferdig. 
+youWonMessage: legger til en overskrift under spillet. 
 
-fullyFilled: er for å se om tallet er 16 eller ikke.
+fullyFilled: sjekker om det er fyllt inn 16 tall i brettet. 
 
-hasDuplicatesInRows: er for å sjekke duplikate tall i radene på brettet.
+hasDuplicatesInRows: sjekker om det er duplikater på brettet. 
 
-getColumns: er for å sjekke duplikate tall i kolonnene på brettet.
+getColumns: gir en 1d representasjon av brettets kolonner.
 
-getSquare: er en under funksjon som trengs av getSquares for å hente ut èn firkant.
+getSquare: benyttes av getSquares for å hente ut èn firkant.
 
-getSquares: bruker getSquare for å sjekke om det er duplikate tall i noen av firkantene i brettet.
+getSquares: gir en 1d representasjon av brettets firkanter.
 
 
 (View):
-updateView(); Kaller på viewet
+updateView(); kaller på viewet.
 
-function updateView(): Viser alt som skal stå i den tomme <div>-en i body ved å referere med id="app".
-Den tegner opp hele brettet, knappene, vinner tekst og tallene i feltene samt sammarbeider med CSS for å kunne fargelegge, bytte størrelse etc.
+function updateView(): viser alt som skal stå i den tomme <div>-en i body ved å referere med id="app".
+Den tegner opp hele brettet, knappene, vinnerteksten og tallene i feltene. 
+Samarbeider med CSS for å kunne fargelegge, bytte størrelse etc.
 
-button1,2,3,4: Ansvarlig for å bytte ut det som står i den valgte cellen med tallene 1-4.
+Benytter hasDuplicatesInRows() til å sjekke om det er duplikater i brettets rader, kolonner eller firkanter.
+Hvis det ikke er duplikater sjekker fullyFilled() om brettet er ferdig utfylt. 
+(View) endrer bakgrunnsfargen på brettet til rosa (duplikater) eller grønn (spill vunnet).  
 
-buttonReset: Står for å sette hele brettet tilbake til startposisjonen samt fjerne den markerte cellen og vinner teksten.
 
-createBoard: Lager opp hele brettet (16 cellene) og viser den markerte cellen som blir vist med updateView funksjonen opp til HTML-en.
+(Controller):
+button1,2,3,4: bytter ut det som står i den valgte cellen med tallene 1-4.
 
-selectSquare: Fargelegger den valgte cellen og fjerner denne når spillet er ferdig.
+buttonReset: setter hele brettet tilbake til startposisjonen og fjerner vinnerteksten.
+
+createBoard: tegner brettet og viser den valgte cellen.
+
+selectSquare: fargelegger den valgte cellen og fjerner denne når spillet er ferdig.
