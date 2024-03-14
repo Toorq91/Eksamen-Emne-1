@@ -33,7 +33,10 @@ Kort forklart - (Controller) Styrer det som skal skje med (Model) og (View), bli
 (MVC) i min kode:
 
 (Model): 
-Variablene gir meg startposisjonen, ID for cellene, verdi på om spillet er ferdig og tom tekst som benytter h1 tag for å gratulere når spillet er ferdig.
+currentBoard: Gir meg startposisjonen. 
+selectedSquareIndex: Gir ID for cellene. 
+finished: Setter verdi på om spillet er ferdig. 
+youWonMessage: Setter tom tekst med h1 tag for å gratulere når spillet er ferdig.
 
 fullyFilled: er for å se om tallet er 16 eller ikke.
 
@@ -52,6 +55,10 @@ updateView(); Kaller på viewet
 function updateView(): Viser alt som skal stå i den tomme <div>-en i body ved å referere med id="app".
 Den tegner opp hele brettet, knappene, vinner tekst og tallene i feltene samt sammarbeider med CSS for å kunne fargelegge, bytte størrelse etc.
 
-button1,2,3,4: Er ansvarlig for å bytte ut det som står i den valgte cellen med tallene 1-4.
+button1,2,3,4: Ansvarlig for å bytte ut det som står i den valgte cellen med tallene 1-4.
 
-buttonReset: 
+buttonReset: Står for å sette hele brettet tilbake til startposisjonen samt fjerne den markerte cellen og vinner teksten.
+
+createBoard: Lager opp hele brettet (16 cellene) og viser den markerte cellen som blir vist med updateView funksjonen opp til HTML-en.
+
+selectSquare: Fargelegger den valgte cellen og fjerner denne når spillet er ferdig.
